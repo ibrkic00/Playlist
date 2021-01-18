@@ -294,7 +294,7 @@ void PretragaPoHashtagu(Song head, char buff[])
 			if (DaLiJeHashtag(head->hashtags, buff))
 			{
 				printf("\nIme pjesme:\t%s\n", head->song);
-				printf("Ime izvodaca:\t%s\n\n", head->hashtags);
+				printf("Ime izvodaca:\t%s\n\n", head->artist);
 				if (test != 1)
 					test = 1;
 			}
@@ -303,7 +303,7 @@ void PretragaPoHashtagu(Song head, char buff[])
 		if (DaLiJeHashtag(head->hashtags, buff))
 		{
 			printf("\nIme pjesme:\t%s\n", head->song);
-			printf("Ime izvodaca:\t%s\n\n", head->hashtags);
+			printf("Ime izvodaca:\t%s\n\n", head->artist);
 			if (test != 1)
 				test = 1;
 		}
@@ -315,12 +315,13 @@ void PretragaPoHashtagu(Song head, char buff[])
 bool DaLiJeHashtag(char hashtags[], char hash[])
 {
 	char buff[MAX];
-	int duljina = strlen(hashtags), i = 1, j = 0;
+	int duljina = strlen(hashtags), i = 0, j = 0;
 
 	if (hash[0] != '#')
 	{
 		while (hashtags[i] != '\n')
 		{
+			i++;
 			memset(buff, 0, sizeof(buff));
 			while (hashtags[i] != '#' && hashtags[i] != '\n')
 			{
@@ -332,7 +333,6 @@ bool DaLiJeHashtag(char hashtags[], char hash[])
 			if (!strcmp(buff, hash))
 				return true;
 			j = 0;
-			i++;
 		}
 		return false;
 	}
@@ -340,6 +340,7 @@ bool DaLiJeHashtag(char hashtags[], char hash[])
 	{
 		while (hashtags[i] != '\n')
 		{
+			i++;
 			memset(buff, 0, sizeof(buff));
 			buff[0] = '#';
 			j = 1;
@@ -352,7 +353,6 @@ bool DaLiJeHashtag(char hashtags[], char hash[])
 			buff[j] = '\n';
 			if (!strcmp(buff, hash))
 				return true;
-			i++;
 		}
 		return false;
 	}
